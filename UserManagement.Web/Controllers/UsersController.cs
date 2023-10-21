@@ -4,29 +4,72 @@ using UserManagement.Web.Models.Users;
 
 namespace UserManagement.WebMS.Controllers;
 
-[Route("users")]
 public class UsersController : Controller
 {
-    private readonly IUserService _userService;
-    public UsersController(IUserService userService) => _userService = userService;
+	private readonly IUserService _userService;
+	public UsersController(IUserService userService) => _userService = userService;
 
-    [HttpGet]
-    public ViewResult List()
-    {
-        var items = _userService.GetAll().Select(p => new UserListItemViewModel
-        {
-            Id = p.Id,
-            Forename = p.Forename,
-            Surname = p.Surname,
-            Email = p.Email,
-            IsActive = p.IsActive
-        });
 
-        var model = new UserListViewModel
-        {
-            Items = items.ToList()
-        };
+	[Route("Users/List")]
+	[HttpGet]
+	public ViewResult List()
+	{
+		var items = _userService.GetAll().Select(p => new UserListItemViewModel
+		{
+			Id = p.Id,
+			Forename = p.Forename,
+			Surname = p.Surname,
+			Email = p.Email,
+			IsActive = p.IsActive
+		});
 
-        return View(model);
-    }
+		var model = new UserListViewModel
+		{
+			Items = items.ToList()
+		};
+
+		return View(model);
+	}
+
+	[Route("Users/ListActive")]
+	[HttpGet]
+	public ViewResult ListActive()
+	{
+		var items = _userService.FilterByActive(true).Select(p => new UserListItemViewModel
+		{
+			Id = p.Id,
+			Forename = p.Forename,
+			Surname = p.Surname,
+			Email = p.Email,
+			IsActive = p.IsActive
+		});
+
+		var model = new UserListViewModel
+		{
+			Items = items.ToList()
+		};
+
+		return View("List", model);
+	}
+
+	[Route("Users/ListNonActive")]
+	[HttpGet]
+	public ViewResult ListNonActive()
+	{
+		var items = _userService.FilterByActive(false).Select(p => new UserListItemViewModel
+		{
+			Id = p.Id,
+			Forename = p.Forename,
+			Surname = p.Surname,
+			Email = p.Email,
+			IsActive = p.IsActive
+		});
+
+		var model = new UserListViewModel
+		{
+			Items = items.ToList()
+		};
+
+		return View("List", model);
+	}
 }
