@@ -75,4 +75,38 @@ public class UsersController : Controller
 
 		return View("List", model);
 	}
+
+	[Route("Users/Add")]
+	[HttpGet]
+	public ViewResult Add()
+	{
+		Models.User model = new Models.User();
+
+		return View(model);
+	}
+
+	[HttpPost]
+	[ValidateAntiForgeryToken]
+	public ViewResult Add(Models.User user)
+	{
+		_userService.Add(user);
+
+		// return to the list view after adding
+		var items = _userService.GetAll().Select(p => new UserListItemViewModel
+		{
+			Id = p.Id,
+			Forename = p.Forename,
+			Surname = p.Surname,
+			Email = p.Email,
+			DateOfBirth = p.DateOfBirth,
+			IsActive = p.IsActive
+		});
+
+		var model = new UserListViewModel
+		{
+			Items = items.ToList()
+		};
+
+		return View("List", model);
+	}
 }

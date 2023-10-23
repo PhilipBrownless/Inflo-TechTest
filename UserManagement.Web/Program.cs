@@ -6,10 +6,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services
-    .AddDataAccess()
-    .AddDomainServices()
-    .AddMarkdown()
-    .AddControllersWithViews();
+	.AddDataAccess()
+	.AddDomainServices()
+	.AddMarkdown()
+	.AddControllersWithViews();
 
 var app = builder.Build();
 
