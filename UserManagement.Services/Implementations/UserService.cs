@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UserManagement.Data;
 using UserManagement.Models;
@@ -24,5 +23,11 @@ public class UserService : IUserService
 
 	public IEnumerable<User> GetAll() => _dataAccess.GetAll<User>();
 
-    public void Add(User user) => _dataAccess.Create(user);
+	public User GetUser(long id) => _dataAccess.GetAll<User>().Where(x => x.Id == id).Single();
+
+	public void Add(User user) => _dataAccess.Create(user);
+
+	public void Edit(User user) => _dataAccess.Update(user);
+
+	public void Delete(User user) => _dataAccess.Delete(user);
 }

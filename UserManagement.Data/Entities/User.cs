@@ -14,6 +14,8 @@ public class User
 
 	[Display(Name = "Date of Birth")]
 	[DataType(DataType.Date)]
-	public DateOnly DateOfBirth { get; set; } = default!;
+	public DateTime DateOfBirth { get; set; } = default!;
+
+	[Display(Name = "Account Active")]
 	public bool IsActive { get; set; }
 }
