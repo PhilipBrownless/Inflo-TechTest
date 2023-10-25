@@ -1,0 +1,45 @@
+﻿@model IEnumerable<UserManagement.Models.UserActionLog>
+
+@{
+    ViewData["Title"] = "Logs";
+}
+
+<h1>Logs</h1>
+
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>
+					@Html.DisplayNameFor(model => model.timeStamp)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.UserId)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.actionType)
+				</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.timeStamp)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.UserId)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.actionType)
+				</td>
+				<td>
+					<a asp-action="View" asp-route-id="@item.Id">Details</a>
+				</td>
+			</tr>
+		}
+		</tbody>
+	</table>
+</div>

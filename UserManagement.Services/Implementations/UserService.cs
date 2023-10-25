@@ -23,11 +23,32 @@ public class UserService : IUserService
 
 	public IEnumerable<User> GetAll() => _dataAccess.GetAll<User>();
 
-	public User GetUser(long id) => _dataAccess.GetAll<User>().Where(x => x.Id == id).Single();
+	public User? GetUser(long id) => _dataAccess.GetAll<User>().Where(x => x.Id == id).SingleOrDefault();
 
-	public void Add(User user) => _dataAccess.Create(user);
+	public void Add(User user)
+	{
+		_dataAccess.Create(user);
 
-	public void Edit(User user) => _dataAccess.Update(user);
+		UserActionLog userActionLog = new UserActionLog(user, UserActionLog.ActionType.Create);
 
-	public void Delete(User user) => _dataAccess.Delete(user);
+		_dataAccess.Create(userActionLog);
+	}
+
+	public void Edit(User user)
+	{
+		_dataAccess.Update(user);
+
+		UserActionLog userActionLog = new UserActionLog(user, UserActionLog.ActionType.Update);
+
+		_dataAccess.Create(userActionLog);
+	}
+
+	public void Delete(User user)
+	{
+		_dataAccess.Delete(user);
+
+		UserActionLog userActionLog = new UserActionLog(user, UserActionLog.ActionType.Delete);
+
+		_dataAccess.Create(userActionLog);
+	}
 }

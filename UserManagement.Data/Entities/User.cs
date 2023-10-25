@@ -18,4 +18,9 @@ public class User
 
 	[Display(Name = "Account Active")]
 	public bool IsActive { get; set; }
+
+	public override string ToString()
+	{
+		return "ID: " + Id.ToString() + "\nForename: " + Forename + "\nSurname: " + Surname + "\nEmail: " + Email + "\nDate of Birth: " + DateOfBirth.ToShortDateString() + "\nAccount Active: " + IsActive.ToString();
+	}
 }

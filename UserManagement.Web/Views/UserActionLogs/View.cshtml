@@ -1,0 +1,42 @@
+﻿@model UserManagement.Models.UserActionLog
+
+@{
+	ViewData["Title"] = "Log Details";
+}
+
+<h1>Log Details</h1>
+
+<div>
+	<h4>User Action Log</h4>
+	<hr />
+	<dl class="row">
+		<dt class = "col-sm-2">
+			@Html.DisplayNameFor(model => model.timeStamp)
+		</dt>
+		<dd class = "col-sm-10">
+			@Html.DisplayFor(model => model.timeStamp)
+		</dd>
+		<dt class = "col-sm-2">
+			@Html.DisplayNameFor(model => model.UserId)
+		</dt>
+		<dd class = "col-sm-10">
+			@Html.DisplayFor(model => model.UserId)
+		</dd>
+		<dt class = "col-sm-2">
+			@Html.DisplayNameFor(model => model.actionType)
+		</dt>
+		<dd class = "col-sm-10">
+			@Html.DisplayFor(model => model.actionType)
+		</dd>
+		<dt class = "col-sm-2">
+			@Html.DisplayNameFor(model => model.actionDetails)
+		</dt>
+		<dd class = "col-sm-10">
+			<pre>@Html.DisplayFor(model => model.actionDetails)</pre>
+		</dd>
+	</dl>
+</div>
+<div>
+	<a asp-controller="Users" asp-action="View" asp-route-Id=@Model.UserId>User Details</a> | 
+	<a asp-controller="UserActionLogs" asp-action="List">Back To All Logs</a>
+</div>

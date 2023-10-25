@@ -114,18 +114,32 @@ public class UsersController : Controller
 	[HttpGet]
 	public ViewResult ViewDetails(long id)
 	{
-		Models.User model = _userService.GetUser(id);
+		Models.User? model = _userService.GetUser(id);
 
-		return View("View", model);
+		if (model != null)
+		{
+			return View("View", model);
+		}
+		else
+		{
+			return View("Error");
+		}
 	}
 
 	[Route("Users/Edit/{id}")]
 	[HttpGet]
 	public ViewResult Edit(long id)
 	{
-		Models.User model = _userService.GetUser(id);
+		Models.User? model = _userService.GetUser(id);
 
-		return View(model);
+		if (model != null)
+		{
+			return View(model);
+		}
+		else
+		{
+			return View("Error");
+		}
 	}
 
 	[HttpPost]
@@ -157,9 +171,16 @@ public class UsersController : Controller
 	[HttpGet]
 	public ViewResult Delete(long id)
 	{
-		Models.User model = _userService.GetUser(id);
+		Models.User? model = _userService.GetUser(id);
 
-		return View(model);
+		if (model != null)
+		{
+			return View(model);
+		}
+		else
+		{
+			return View("Error");
+		}
 	}
 
 	[HttpPost]
