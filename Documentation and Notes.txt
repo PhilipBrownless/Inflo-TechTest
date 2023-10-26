@@ -1,0 +1,21 @@
+Tasks up to and including the 'advanced' logging tasks should be implemented and functional.
+
+_________
+
+
+Additional packages installed include:
+
+Microsoft.EntityFrameworkCore.Design Version 7.0.12 - To get the view scaffolding functionality in Visual Studio to work, making page construction smoother.
+
+X.PagedList.Mvc.Core Version 8.4.7 - To add pagination helper functions.
+
+_________
+
+
+Some improvements to the system that I ran out of time to figure out and or implement could include:
+- More detailed sorting/filtering
+- More informative error pages in the event that you try to access the user details of a deleted user (and probably removing UI flows that try to go there in the first place)
+- Adding pagination to other areas (such as the users list and the logs on individual user pages)
+- Improving efficiency by ensuring filtering is happening on the database side rather than the client side after pulling down large data sets
+- More consistent use of best practices to better enable scalability and maintainability
+- The suggested improvements in the 'expert' task section

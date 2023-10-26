@@ -1,4 +1,5 @@
-﻿@model IEnumerable<UserManagement.Models.UserActionLog>
+﻿@model X.PagedList.IPagedList<UserManagement.Models.UserActionLog>
+@using X.PagedList.Mvc.Core;
 
 @{
 	ViewData["Title"] = "Logs";
@@ -11,13 +12,13 @@
 		<thead>
 			<tr>
 				<th>
-					@Html.DisplayNameFor(model => model.timeStamp)
+					@Html.DisplayNameFor(model => model.First().timeStamp)
 				</th>
 				<th>
-					@Html.DisplayNameFor(model => model.UserId)
+					@Html.DisplayNameFor(model => model.First().UserId)
 				</th>
 				<th>
-					@Html.DisplayNameFor(model => model.actionType)
+					@Html.DisplayNameFor(model => model.First().actionType)
 				</th>
 				<th></th>
 			</tr>
@@ -42,4 +43,10 @@
 		}
 		</tbody>
 	</table>
+
+	Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+	@Html.PagedListPager(Model, page => Url.Action("List",
+	new { page }))
+
 </div>

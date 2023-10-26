@@ -1,4 +1,5 @@
 ﻿using UserManagement.Services.Domain.Interfaces;
+using X.PagedList;
 
 namespace UserManagement.WebMS.Controllers;
 
@@ -10,11 +11,13 @@ public class UserActionLogsController : Controller
 
 	[Route("UserActionLogs/List")]
 	[HttpGet]
-	public ViewResult List()
+	public ViewResult List(int? page)
 	{
 		var model = _userActionLogService.GetAll();
 
-		return View(model);
+		int pageSize = 10;
+		int pageNumber = page ?? 1;
+		return View(model.ToPagedList(pageNumber, pageSize));
 	}
 
 	[Route("UserActionLogs/View/{id}")]

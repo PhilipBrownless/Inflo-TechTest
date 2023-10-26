@@ -117,7 +117,7 @@ public class UsersController : Controller
 	{
 		var model = new Tuple<Models.User?, IEnumerable<Models.UserActionLog>>(_userService.GetUser(id), _userService.GetUserLogs(id));
 
-		if (model != null)
+		if (model != null && model.Item1 != null)
 		{
 			return View("View", model);
 		}
