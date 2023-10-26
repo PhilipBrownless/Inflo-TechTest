@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using UserManagement.Services.Domain.Interfaces;
 using UserManagement.Web.Models.Users;
 
@@ -114,7 +115,7 @@ public class UsersController : Controller
 	[HttpGet]
 	public ViewResult ViewDetails(long id)
 	{
-		Models.User? model = _userService.GetUser(id);
+		var model = new Tuple<Models.User?, IEnumerable<Models.UserActionLog>>(_userService.GetUser(id), _userService.GetUserLogs(id));
 
 		if (model != null)
 		{

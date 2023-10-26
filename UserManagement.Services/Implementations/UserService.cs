@@ -51,4 +51,7 @@ public class UserService : IUserService
 
 		_dataAccess.Create(userActionLog);
 	}
+
+
+	public IEnumerable<UserActionLog> GetUserLogs(long id) => _dataAccess.GetAll<UserActionLog>().Where(x => x.UserId == id).OrderByDescending(x => x.timeStamp);
 }
